@@ -1,8 +1,8 @@
 # mit-opencourseware
 *MIT Engineering and Computer Science Degree Requirements*
 
- - Introduction to Computer Science Programming in Python - 
- - Introduction to Computational Thinking and Data Science
+ - 6.0001 Introduction to Computer Science Programming in Python - on edX (Status: In Progress)
+ - 6.0002 Introduction to Computational Thinking and Data Science - on edX
  - Fundamentals of Programming
  - Elements of Software Construction
  - Mathematics for Computer Science
