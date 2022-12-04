@@ -3,7 +3,7 @@
 
  - 6.0001 Introduction to Computer Science Programming in Python - on edX (Status: In Progress)
  - 6.0002 Introduction to Computational Thinking and Data Science - on edX
- - Fundamentals of Programming
+ - 6.101 Fundamentals of Programming - on OCW 
  - Elements of Software Construction
  - Mathematics for Computer Science
  - Introduction to Algorithms
