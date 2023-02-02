@@ -1,20 +1,20 @@
 # mit-opencourseware
+
+Following MIT's degree requirements for their major 6-3: Computer Science and Engineering (pre 2022)
+
 *MIT Engineering and Computer Science Degree Requirements*
 
- - 6.0001 Introduction to Computer Science Programming in Python - on edX
+ - 6.100A Introduction to Computer Science Programming in Python - on edX
  - 6.0002 Introduction to Computational Thinking and Data Science - on edX
- - 6.101 Fundamentals of Programming - on OCW 
- - Elements of Software Construction
- - Mathematics for Computer Science
- - Introduction to Algorithms
- - Design and Analysis of Algorithms
- - Computer Systems Engineering
- - Introduction to Low-level Programming in C and Assembly
- - Computation Structures
+ - 6.1200 Mathematics for Computer Science - on MIT Open Learning Library
+ - 6.1010 Fundamentals of Programming
  - Linear Algebra
- - Computability and Complexity Theory
- - Theory of Computation
- - Software Studio
- - Computer Language Engineering
- - (LAST CLASS)
-
+ - 6.1210 Introduction to Algorithms
+ - 6.1910 Computation Structures
+ - 6.1020 Software Construciton
+ - 6.1220 Design and Analysis of Algorithms
+ - 6.1800 Computer Systems Engineering
+ - 6.4100 Artificial Intelligence
+ - 6.3900 Introduction to Machine Learning
+ - 2 from AUS2
+ - 3 from EECS
