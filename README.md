@@ -5,8 +5,8 @@ Following MIT's degree requirements for their major 6-3: Computer Science and En
 *MIT Engineering and Computer Science Degree Requirements*
 
  - 6.100A Introduction to Computer Science Programming in Python - on edX
-   • Python Basics: Introduction to Python, Core Elements of Programs
-   • Simple Programs: Simple Algorithms, Functions
+   -- Python Basics: Introduction to Python, Core Elements of Programs
+   -- Simple Programs: Simple Algorithms, Functions
  - 6.0002 Introduction to Computational Thinking and Data Science - on edX
  - 6.1200 Mathematics for Computer Science - on MIT Open Learning Library
  - 6.1010 Fundamentals of Programming
