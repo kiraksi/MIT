@@ -53,7 +53,6 @@ def isWordGuessed(secretWord, lettersGuessed):
     '''
     # FILL IN YOUR CODE HERE...
     count = 0
-    
     for elem in lettersGuessed:
         if elem in secretWord:
             count += 1
@@ -62,8 +61,7 @@ def isWordGuessed(secretWord, lettersGuessed):
         return True
     else:
         return False
-
-
+    
 
 def getGuessedWord(secretWord, lettersGuessed):
     '''
@@ -75,7 +73,6 @@ def getGuessedWord(secretWord, lettersGuessed):
     # FILL IN YOUR CODE HERE...
     temp = []
     temp_string = ""
-    
     for elem in lettersGuessed:
         if elem in secretWord:
             temp.append(elem)
@@ -97,7 +94,6 @@ def getAvailableLetters(lettersGuessed):
     '''
     # FILL IN YOUR CODE HERE...
     temp_string = string.ascii_lowercase
-    
     for elem in lettersGuessed:
         temp_string = temp_string.replace(elem, "")
 
