@@ -241,24 +241,20 @@ class CiphertextMessage(Message):
         '''
         best_word_count = 0
         best_shift = 0
-        self.message_text_copy = self.message_text[:]
 
         for i in range(26):
-            test_shift = i
             word_count = 0
-            for word in self.message_text.split(" "):
-                self.message_text = word
-                if is_word(self.valid_words, self.apply_shift(test_shift)) == True:
+            test = self.apply_shift(i)
+
+            for word in test.split(" "):
+                if word in self.valid_words:
                     word_count += 1
                     
             if word_count > best_word_count:
                 best_word_count = word_count
-                best_shift = test_shift
-                
-            self.message_text = self.message_text_copy
+                best_shift = i
             
         return best_shift, self.apply_shift(best_shift)
-
 
 def decrypt_story():
     '''
