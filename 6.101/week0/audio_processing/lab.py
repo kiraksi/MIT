@@ -9,40 +9,49 @@ import struct
 
 
 def backwards(sound):
-    raise NotImplementedError
+    backwards_sound = {}
+    for key, value in sound.items():
+        if key == "samples":
+            value = value[:]
+            value.reverse()
+        backwards_sound.update({key: value})
+
+    return backwards_sound
 
 
 def mix(sound1, sound2, p):
-
-
     # mix 2 good sounds
-    if ("rate" in sound1.keys() and "rate" in sound2.keys() and sound1["rate"]==sound2["rate"])==False: 
-        
+    if (
+        "rate" in sound1.keys()
+        and "rate" in sound2.keys()
+        and sound1["rate"] == sound2["rate"]
+    ) == False:
         print("no")
         return
 
-    r=sound1["rate"]# get rate
-    sound1=sound1["samples"]
-    sound2=sound2["samples"]
-    if len(sound1)<len(sound2):l=len(sound1)
-    elif len(sound2)<len(sound1):l=len(sound2)
-    elif len(sound1)==len(sound2):l=len(sound1)
+    r = sound1["rate"]  # get rate
+    sound1 = sound1["samples"]
+    sound2 = sound2["samples"]
+    if len(sound1) < len(sound2):
+        l = len(sound1)
+    elif len(sound2) < len(sound1):
+        l = len(sound2)
+    elif len(sound1) == len(sound2):
+        l = len(sound1)
     else:
-        print("whoops") 
+        print("whoops")
         return
 
-    s= []
-    x= 0
-    while x<=l: 
-        s2,s1 = p*sound1[x], sound2[x]*(1 - p)
-        s.append(s1+s2)# add sounds
-        x+= 1
-        if x ==l:# end 
+    s = []
+    x = 0
+    while x <= l:
+        s2, s1 = p * sound1[x], sound2[x] * (1 - p)
+        s.append(s1 + s2)  # add sounds
+        x += 1
+        if x == l:  # end
             break
 
- 
-    
-    return {"rate": r, "samples": s}# return new sound
+    return {"rate": r, "samples": s}  # return new sound
 
 
 def convolve(sound, kernel):
@@ -235,5 +244,10 @@ if __name__ == "__main__":
     # sounds/hello.wav, rather than just as hello.wav, to account for the
     # sound files being in a different directory than this file)
     hello = load_wav("sounds/hello.wav")
+    mystery_wav = load_wav("sounds/mystery.wav")
+    synth = load_wav("sounds/synth.wav")
+    water = load_wav("sounds/water.wav")
 
     # write_wav(backwards(hello), "hello_reversed.wav")
+    # write_wav(backwards(mystery_wav), "mystery_reversed.wav")
+    # write_wav(mix(synth, water, 0.2), "mixed_synth_water.wav")
