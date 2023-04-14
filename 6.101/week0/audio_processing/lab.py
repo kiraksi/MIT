@@ -25,7 +25,7 @@ def mix(sound1, sound2, p):
         "rate" in sound1.keys()
         and "rate" in sound2.keys()
         and sound1["rate"] == sound2["rate"]
-    ) == False:
+        ) == False:
         print("no")
         return
 
@@ -77,19 +77,10 @@ def convolve(sound, kernel):
         samples.append(scaled_sample)
 
     # combine samples into one list
-    final_sample = []
+    final_sample = [0] * (len(sound['samples']) + len(kernel) -1)
     for sample in samples:
-        for i, val in enumerate(sample):
-            # if not long enough, add [0] to end
-            if i >= len(final_sample):
-                final_sample = final_sample + [0]
-
-            # update final sample with new sample value
-            new_sample = [0] * len(final_sample)
-            new_sample[i] = val
-            for j, prev_val in enumerate(final_sample):
-                new_sample[j] += prev_val
-            final_sample = new_sample
+        for i in range(len(sample)):
+            final_sample[i] += sample[i]
 
     return {"rate": sound["rate"], "samples": final_sample}
 
@@ -108,22 +99,37 @@ def echo(sound, num_echoes, delay, scale):
     Returns:
         A new mono sound dictionary resulting from applying the echo effect.
     """
-    delay_n = int(delay * sound["reta"])
+    delay_n = round(delay * sound["rate"])
     echo_filter = [0] * (delay_n * num_echoes - 1)
     for i in range(1, len(echo_filter)):
         offset = int(i * delay)
-        echo_filter[offset] = scale * i
+        echo_filter[offset] = scale**i
 
-    return convolve(echo_flter, sound)
+    return convolve(sound, echo_filter)
+
 
 
 def pan(sound):
-    raise NotImplementedError
+    right_sound = sound['right'][:]
+    left_sound = sound['left'][:]
+
+    right_sound[0] = 0
+    for i in range(1, len(right_sound)-1):
+        right_sound[i] *= (i/(len(right_sound)-1))
+    
+    left_sound[-1] = 0
+    for i in range(1, len(left_sound)-1):
+        left_sound[i] *= (1 - (i/(len(left_sound)-1)))
+    
+    return {'rate': sound['rate'], 'left': left_sound, 'right': right_sound}
 
 
 def remove_vocals(sound):
-    raise NotImplementedError
-
+    samples = sound['left'][:]
+    for i in range(len(samples)):
+        samples[i] -= sound['right'][i]
+    
+    return {'rate': sound['rate'], 'samples': samples}
 
 # below are helper functions for converting back-and-forth between WAV files
 # and our internal dictionary representation for sounds
@@ -247,7 +253,16 @@ if __name__ == "__main__":
     mystery_wav = load_wav("sounds/mystery.wav")
     synth = load_wav("sounds/synth.wav")
     water = load_wav("sounds/water.wav")
+    ice_and_chilli = load_wav("sounds/ice_and_chilli.wav")
+    chord = load_wav("sounds/chord.wav")
+    car = load_wav("sounds/car.wav", stereo=True)
+    lookout_mountain = load_wav("sounds/lookout_mountain.wav", stereo=True)
 
     # write_wav(backwards(hello), "hello_reversed.wav")
     # write_wav(backwards(mystery_wav), "mystery_reversed.wav")
     # write_wav(mix(synth, water, 0.2), "mixed_synth_water.wav")
+    # write_wav(convolve(ice_and_chilli, bass_boost_kernel(1000, 1.5)), "bass_boosted_ice_and_chilli.wav")
+    ###write_wav(echo(chord, 5, .3, .6), "echoed_chord.wav")
+    # write_wav(pan(car), "pan_car.wav")
+    # write_wav(remove_vocals(lookout_mountain), "no_vocals_lookout_mountain.wav")
+
