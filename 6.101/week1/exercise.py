@@ -7,8 +7,10 @@ def poly_evaluate(p, x):
     coefficients, and a number `x`, returns the value of the
     polynomial p[0]x^0 + p[1]x^1 + ... + p[n-1]x^(n-1)
     """
-    answer = 0
-    for i in range(len(p)):
-        answer += p[i] * x ** i
-    return answer
+    return sum(n * x**i for i, n in enumerate(p))
+
+    # answer = 0
+    # for i in range(len(p)):
+    #     answer += p[i] * x ** i
+    # return answer
 

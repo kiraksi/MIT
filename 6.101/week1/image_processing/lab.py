@@ -12,29 +12,29 @@ from PIL import Image
 
 
 def get_pixel(image, row, col):
-    return image["pixels"][col, row]
+    return image["pixels"][row*image["height"] + col]
 
 
 def set_pixel(image, row, col, color):
-    image["pixels"][row, col] = color
+    image["pixels"][row*image["height"] + col] = color
 
 
 def apply_per_pixel(image, func):
     result = {
         "height": image["height"],
-        "widht": image["width"],
-        "pixels": [],
+        "width": image["width"],
+        "pixels": image["pixels"],
     }
     for col in range(image["height"]):
         for row in range(image["width"]):
-            color = get_pixel(image, col, row)
+            color = get_pixel(image, row, col)
             new_color = func(color)
-        set_pixel(result, row, col, new_color)
+            set_pixel(result, row, col, new_color)
     return result
 
 
 def inverted(image):
-    return apply_per_pixel(image, lambda color: 256-color)
+    return apply_per_pixel(image, lambda color: 255-color)
 
 
 # HELPER FUNCTIONS
