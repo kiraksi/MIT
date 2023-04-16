@@ -11,8 +11,12 @@ from PIL import Image
 # NO ADDITIONAL IMPORTS ALLOWED!
 
 
-def get_pixel(image, row, col):
-    return image["pixels"][row*image["height"] + col]
+def get_pixel(image, row, col, boundary_behavior=None):
+    try:
+        return image["pixels"][row*image["height"] + col]
+    except IndexError:
+        return 0
+
 
 
 def set_pixel(image, row, col, color):
@@ -23,7 +27,7 @@ def apply_per_pixel(image, func):
     result = {
         "height": image["height"],
         "width": image["width"],
-        "pixels": image["pixels"],
+        "pixels": image["pixels"][:],
     }
     for col in range(image["height"]):
         for row in range(image["width"]):
@@ -59,8 +63,27 @@ def correlate(image, kernel, boundary_behavior):
     separate structure to represent the output.
 
     DESCRIBE YOUR KERNEL REPRESENTATION HERE
+    The kernel is a matrix (list)
     """
-    raise NotImplementedError
+    if boundary_behavior not in ["zero", "extend", "wrap"]:
+        return None
+    
+    result = {
+        "height": image["height"],
+        "width": image["width"],
+        "pixels": image["pixels"][:]
+    }
+
+    for col in range(image["height"]):
+        for row in range(image["width"]):
+            value = get_pixel(image, row, col)
+            new_value = kernel_operation(image, row, col, kernel)
+    
+    def kernel_operation(image, row, col, kernel):
+        new_value = get_pixel(image, row-1, col-1) * kernel[0] + get_pixel(image, row-1, col) * kernel[1] + get_pixel(image, row-1, col+1) * kernel[2]
+        return 
+
+
 
 
 def round_and_clip_image(image):
@@ -140,8 +163,12 @@ def save_greyscale_image(image, filename, mode="PNG"):
     out.close()
 
 
+
 if __name__ == "__main__":
     # code in this block will only be run when you explicitly run your script,
     # and not when the tests are being run.  this is a good place for
     # generating images, etc.
-    pass
+    bluegill = load_greyscale_image("test_images/bluegill.png")
+
+
+    # save_greyscale_image(inverted(bluegill), "bluegill_inverted.png", mode="PNG")

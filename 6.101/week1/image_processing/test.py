@@ -83,7 +83,81 @@ def test_inverted_2():
     }
     compare_images(result, expected)
 
-@pytest.mark.skip
+
+def test_correlate_identity():
+    im = {
+        'height': 5,
+        'width': 5,
+        'pixels': [35, 40, 41, 45, 50,
+                   40, 40, 42, 46, 52,
+                   42, 46, 50, 55, 55,
+                   48, 52, 56, 58, 60,
+                   56, 60, 65, 70, 75]
+    }
+    kernel = [0, 0, 0,
+              0, 1, 0,
+              0, 0, 0]
+    result = lab.correlate(im, kernel, "zero")
+    expected = {
+        'height': 5,
+        'width': 5,
+        'pixels': [35, 40, 41, 45, 50,
+                   40, 40, 42, 46, 52,
+                   42, 46, 50, 55, 55,
+                   48, 52, 56, 58, 60,
+                   56, 60, 65, 70, 75]
+    }
+    compare_images(result, expected)
+
+def test_correlate_translation():
+    im = {
+    'height': 5,
+    'width': 5,
+    'pixels': [35, 40, 41, 45, 50,
+               40, 40, 42, 46, 52,
+               42, 46, 50, 55, 55,
+               48, 52, 56, 58, 60,
+               56, 60, 65, 70, 75]
+    }
+    kernel = [0, 0, 0, 0, 0,
+              0, 0, 0, 0, 0,
+              1, 0, 0, 0, 0,
+              0, 0, 0, 0, 0,
+              0, 0, 0, 0, 0]
+    result = lab.correlate(im, kernel, "zero")
+    expected = {
+        'height': 5,
+        'width': 5,
+        'pixels': [35, 35, 35, 40, 41,
+                   40, 40, 40, 40, 42,
+                   42, 42, 42, 46, 50,
+                   48, 48, 48, 52, 56,
+                   56, 56, 56, 60, 65]
+    }
+    compare_images(result, expected)
+
+def test_correlate_average():
+    im = {
+    'height': 5,
+    'width': 5,
+    'pixels': [35, 40, 41, 45, 50,
+               40, 40, 42, 46, 52,
+               42, 46, 50, 55, 55,
+               48, 52, 56, 58, 60,
+               56, 60, 65, 70, 75]
+    }
+    kernel = [0.0, 0.2, 0.0,
+              0.2, 0.2, 0.2,
+              0.0, 0.2, 0.0]
+    result = lab.correlate(im, kernel, "zero")
+    expected = {
+        'height': 5,
+        'width': 5,
+        'pixels': []
+    }
+    compare_images(result, expected)
+
+
 @pytest.mark.parametrize("fname", ['mushroom', 'twocats', 'chess'])
 def test_inverted_images(fname):
     inpfile = os.path.join(TEST_DIRECTORY, 'test_images', '%s.png' % fname)
