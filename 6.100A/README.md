@@ -37,4 +37,5 @@
 ## Final
 
 # Final Grades and Certificate
-![SCORE](https://github.com/kira-kaur-sidhu/mit-opencourseware/blob/main/6.100A/proof_of_completion/progress_chart.png)raw=true)
+![SCORE](https://github.com/kira-kaur-sidhu/mit-opencourseware/blob/main/6.100A/proof_of_completion/progress_chart.png)
+![CERTIFICATE](https://github.com/kira-kaur-sidhu/mit-opencourseware/blob/main/6.100A/proof_of_completion/Certificate.png)
