@@ -1,0 +1,13 @@
+[
+{'ok': True, 'output': 1},
+{'ok': True, 'output': 2},
+{'ok': True, 'output': 7},
+{'ok': True, 'output': [9, 3, 2]},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': True, 'output': [3, 4, 5]},
+]

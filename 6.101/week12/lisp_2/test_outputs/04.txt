@@ -1,0 +1,11 @@
+[
+  {'ok': True, 'output': 3},
+  {'ok': True, 'output': -2},
+  {'ok': True, 'output': 7.65},
+  {'ok': True, 'output': -8.9},
+  {'ok': True, 'output': 5},
+  {'ok': True, 'output': 27},
+  {'ok': True, 'output': -1},
+  {'ok': True, 'output': -21},
+  {'ok': False, 'type': 'SchemeEvaluationError'},
+]

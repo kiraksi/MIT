@@ -1,0 +1,11 @@
+[
+{"ok": True, "output": "bare-name"},
+{"ok": True, "output": 6.28},
+{"ok": True, "output": "spam"},
+{"ok": True, "output": 2},
+{"ok": True, "output": 0.2},
+{"ok": True, "output": -3},
+{"ok": True, "output": -9.8},
+{"ok": True, "output": "--9.8"},
+{"ok": True, "output": "9.8.2"},
+]

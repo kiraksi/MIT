@@ -1,0 +1,10 @@
+[
+{'ok': True, 'output': 10},
+{'ok': True, 'output': 10},
+{'ok': True, 'output': 19},
+{'ok': True, 'output': 19},
+{'ok': False, 'type': 'SchemeNameError'},
+{'ok': False, 'type': 'SchemeNameError'},
+{'ok': True, 'output': [4, 9, 9]},
+{'ok': True, 'output': 19},
+]

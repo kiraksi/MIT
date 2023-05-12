@@ -1,0 +1,10 @@
+[
+["(", "adam", "adam", "chris", "duane", ")", "extra", "things"],
+["(", "adam", "adam", "chris", "duane", ")", ")"],
+["(", "(", "missing-paren", ")"],
+["another-missing-paren", ")"],
+[")", "(", "spam", ")", "("],
+["define", "x", "3"],
+["("],
+[")"],
+]

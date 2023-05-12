@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  padding-bottom: 50px;
+}
+
+#board {
+  border: 7px solid black;
+  border-collapse: collapse;
+  font-family: Calibri, sans-serif;
+  height: min(80vh, 80vw);
+  width: min(80vh, 80vw);
+  margin-bottom: 20px;
+}
+
+colgroup, tbody {
+  border: 5px solid #0350ba;
+}
+
+td {
+  border: solid thin;
+  text-align: center;
+  padding: 0;
+}
+
+.selected {
+  background-color: #bbb2e9;
+}
+
+.controls {
+  width: 50vw;
+  display: flex;
+  flex-direction: row;
+  align-items: start;
+  justify-content: space-evenly;
+}
+
+.controls-section {
+  display: flex;
+  flex-direction: column;
+}
+
+#victory {
+  color: green;
+  font-weight: bold;
+}
+
+#loadingContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+#loadingContainer img {
+  padding: 20px;
+  animation: spin 0.5s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform:rotate(0deg);
+  }
+  to {
+    transform:rotate(360deg);
+  }
+}
+</style>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <h1>6.101 Sudoku!</h1>
+  <h3 id="victory" style="display: none;" >VICTORY</h3>
+  <small>Click a spot and enter a number (enter 0 to clear)</small>
+  <small>Scroll down for controls</small>
+
+  <!-- loading icon -->
+  <div id="loadingContainer"><img src="/snek.gif" alt="a cute, pixelated, snek"><b>Loading...</b></div>
+
+  <br>
+  <table id="board"></table>
+
+  <div class="controls">
+    <div class="controls-section">
+      Load board from file:
+      <input id="file-upload" type="file" accept="json">
+      <button id="load-btn">Reload</button>
+    </div>
+    <div class="controls-section">
+      <input id="boardLen" type="number" placeholder="Side length">
+      <button id="create-btn">New board</button>
+    </div>
+    <div class="controls-section">
+      <button id="solve-btn">Run Solver</button>
+    </div>
+  </div>
+
+</body>
+</html>
+<script>
+async function myFetch(loc, body){
+  try{
+    const response = await fetch(loc, {
+      method: 'POST',
+      cache: 'no-cache',
+      redirect: 'follow',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(body),
+    })
+    if (response.ok) {
+      return await response.json();
+    } else {
+      return {error: await response.text()};
+    }
+  }catch(e){
+    return {error: await 'Could not communicate with the server.  Is it running?', off: true}
+  }
+}
+  function regionSize(n) {
+    let sn = Math.floor(Math.sqrt(n)) - 1;
+    while (n % ++sn != 0 && sn < n) {}
+    return [n / sn, sn];
+  }
+  let selectedCoords = undefined;
+  let board;
+  let boardTdElts;
+  let N;
+
+  function coordsEq(c1, c2) {
+    return c1 && c2 && c1[0] == c2[0] && c1[1] == c2[1];
+  }
+
+  function toggleEltSelect(tdElt, coords) {
+    if (coordsEq(coords,selectedCoords)) {
+      tdElt.classList.remove('selected');
+      selectedCoords = undefined;
+    }
+    else {
+      tdElt.classList.add('selected');
+      if (selectedCoords) {
+        const [r,c] = selectedCoords;
+        boardTdElts[r][c].classList.remove('selected');
+      }
+      selectedCoords = coords;
+    }
+  }
+
+function makeBoard(n) {
+  console.log('making board');
+  console.log(n);
+  const boardElt = document.getElementById('board');
+  // clear the board
+  boardElt.innerHTML = "";
+  const [sw, sh] = regionSize(n);
+  N = n;
+
+  // create the vertical borders for the regions
+  for (let j = 0; j < n / sw; j++) {
+    const colgroupElt = document.createElement('colgroup');
+    boardElt.appendChild(colgroupElt);
+    for (let k = 0; k < sw; k++) {
+      const colElt = document.createElement('col');
+      colgroupElt.appendChild(colElt);
+    }
+  }
+  console.log('borders made');
+
+  // create the js rep for the board
+  boardTdElts = [];
+  board = []
+  for (let i = 0; i < n; i++) {
+    board.push([]);
+    boardTdElts.push([]);
+    for (let j = 0; j < n; j++) {
+      board[i].push(0);
+      boardTdElts[i].push(undefined);
+    }
+  }
+
+
+  // create the horizontal borders for the regions
+  // and fill the board
+  for (let j = 0; j < n / sh; j++) {
+    const tbodyElt = document.createElement('tbody');
+    boardElt.appendChild(tbodyElt);
+    for (let k = 0; k < sh; k++) {
+      const trElt = document.createElement('tr');
+      tbodyElt.appendChild(trElt);
+      for (let p = 0; p < n; p++) {
+        const tdElt = document.createElement('td');
+        tdElt.style.width = `min(${80 / n}vh, ${80 / n}vw)`;
+        tdElt.style.height = `min(${80 / n}vh, ${80 / n}vw)`;
+        // to show the coordiantes on each cell:
+        // tdElt.innerText = `${j*sh+k}_${p}`;
+        const [r,c] = [j*sh+k, p];
+        tdElt.addEventListener('click', () => toggleEltSelect(tdElt, [r,c]));
+        trElt.appendChild(tdElt);
+        boardTdElts[r][c] = tdElt;
+      }
+    }
+  }
+}
+
+
+const victoryElt = document.getElementById('victory')
+
+function toggleVictory(val) {
+  victoryElt.style.display = (val) ? "block" : "none"
+}
+
+async function victoryCheck(checkCoords) {
+  myFetch('/victory_check', {board, checkCoords}).then(r => toggleVictory(r.victory === true));
+}
+
+document.addEventListener('keypress', async (ev) => {
+  const key = ev.key;
+  const v = parseInt(key);
+  if (isNaN(v) || selectedCoords === undefined || v > N || v < 0) return;
+  const [r,c] = selectedCoords;
+  boardTdElts[r][c].innerText = v == 0 ? "" : v;
+  board[r][c] = v;
+  toggleEltSelect(boardTdElts[r][c], selectedCoords);
+  await victoryCheck([r, c]);
+})
+
+function badUpload(reason) {
+  console.log('bad');
+}
+
+const fileElt = document.getElementById('file-upload');
+let loadedBoard = undefined;
+fileElt.addEventListener('change', async (ev) => {
+  // parse the JSON and load the level
+  const reader = new FileReader();
+  const file = ev.target.files[0];
+
+  reader.addEventListener('load', ev => {
+    // make a new board
+    loadedBoard = JSON.parse(ev.target.result);
+    if (!(loadedBoard instanceof Array)) return badUpload('json file must be a 2D array');
+    const n = loadedBoard.length;
+    // make sure all the values are numbers
+    for (let r = 0; r < n; r++)
+      for (let c = 0; c < n; c++)
+        if (isNaN(loadedBoard[r][c])) return badUpload(`Bad element at r=${r},c=${c}`);
+
+    useBoard();
+  })
+
+  reader.readAsText(file);
+})
+
+// uses `loadedBoard` by default
+function useBoard(newBoard) {
+  if (newBoard === undefined)
+    newBoard = loadedBoard;
+  if (!newBoard) return;
+  const n = newBoard.length;
+  makeBoard(n);
+  // fill the board with the loaded values
+  for (let r = 0; r < n; r++)
+    for (let c = 0; c < n; c++) {
+      const v = newBoard[r][c];
+      board[r][c] = v;
+      boardTdElts[r][c].innerText = v ? v : "";
+    }
+  // do a victory check
+  victoryCheck();
+}
+document.getElementById('load-btn').addEventListener('click', useBoard);
+
+function isPerfectSquare(n){
+    for (let i=0; i<=n/2; i++){
+        if (Math.pow(i, 2) == n){
+            return true;
+        }
+    }
+    return false;
+}
+
+const lenInpElt = document.getElementById('boardLen');
+document.getElementById('create-btn').addEventListener('click', () => {
+  const n = lenInpElt.value;
+  try{
+  if (isPerfectSquare(n)){
+    makeBoard(n && n > 1 ? n : 9);
+  }else{
+    alert('board size must be a perfect square bigger than 1!');
+  }
+  }catch(e){
+    makeBoard(9);
+  }
+  toggleVictory(false);
+
+
+});
+
+function startLoading() {
+  document.getElementById('loadingContainer').style.display = "flex";
+}
+
+function stopLoading() {
+  document.getElementById('loadingContainer').style.display = "none";
+}
+
+async function runSolver() {
+  startLoading();
+  const solvedBoard = await myFetch('/solve', board);
+  console.log('solved', solvedBoard);
+  if (solvedBoard === null){
+    alert('could not solve this board!');
+    stopLoading();
+    return;
+  }
+  if (solvedBoard.error){
+      if (solvedBoard.off === true){
+        alert('could not communicate with the server!  is it running?');
+      }else{
+        alert('an error occurred!  please check the terminal for more information');
+      }
+  }
+  stopLoading();
+  useBoard(solvedBoard);
+}
+
+document.getElementById('solve-btn').addEventListener('click', runSolver);
+
+makeBoard(9);
+stopLoading();
+</script>

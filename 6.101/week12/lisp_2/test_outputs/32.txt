@@ -1,0 +1,8 @@
+[
+{"ok": True, "output": ["spam"]},
+{"ok": True, "output": ["(", "with", "comments", ")"]},
+{"ok": True, "output": ["(", "multiline", "statement", ")"]},
+{"ok": True, "output": ["(", "w3!|]\\d5y8[]1$", ")"]},
+{"ok": True, "output": ["(", "nested", "(", "expressions", "(", "test", ")", "(", "is", "here", ")", "(", "(", "(", "(", "now", ")", ")", ")", ")", ")", ")"]},
+{"ok": True, "output": ["(", ")"]},
+]

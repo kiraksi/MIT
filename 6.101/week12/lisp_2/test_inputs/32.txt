@@ -1,0 +1,8 @@
+[
+  "spam ; (",
+  "(with comments) ; comment test",
+  "(multiline ; with comments\n statement) ; with comments",
+  "(w3!|]\\d5y8[]1$)",
+  "(nested (expressions (test) (is here) ((((now))))))",
+  "()",
+]

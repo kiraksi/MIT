@@ -1,0 +1,6 @@
+[
+  ['define', 'addN', ['lambda', ['n'], ['lambda', ['i'], ['+', 'i', 'n']]]],
+  ['define', 'add7', ['addN', 7]],
+  ['add7', 2],
+  ['add7', [['addN', 3], [['addN', 19], 8]]],
+]

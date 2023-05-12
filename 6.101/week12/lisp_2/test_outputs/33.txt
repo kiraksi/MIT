@@ -1,0 +1,13 @@
+[
+{"ok": True, "output": ["spam"]},
+{"ok": True, "output": ["john", "paul", "george", "ringo"]},
+{"ok": True, "output": ["numbers", 3.14, 3, -2, -2.4]},
+{"ok": True, "output": ["multi", "line", "statement"]},
+{"ok": True, "output": ["with", "comments"]},
+{"ok": True, "output": ["multiline", "statement"]},
+{"ok": True, "output": ["weird", "white", "space"]},
+{"ok": True, "output": []},
+{"ok": True, "output": ["+", ["-", 5, 3], 7]},
+{"ok": True, "output": ["w3!|]\\d5y8[]1$"]},
+{"ok": True, "output": ["nested", ["expressions", ["test"], ["is", "here"], [[[["now"]]]]]]},
+]

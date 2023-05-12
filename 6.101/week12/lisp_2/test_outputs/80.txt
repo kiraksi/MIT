@@ -1,0 +1,9 @@
+[
+{'ok': True, 'output': [1, -1, -3, -2]},
+{'ok': True, 'output': [1]},
+{'ok': True, 'output': [1, -1, -3, -2]},
+{'ok': True, 'output': [1, 1, 1, 1, -1, -1, -1, -1]},
+{'ok': True, 'output': [1, 1, 1, 1, 0, 0, 0, -1, -1, -1, -1]},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': True, 'output': []},
+]

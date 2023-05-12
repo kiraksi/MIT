@@ -1,0 +1,10 @@
+[
+    [["d", true], ["b", true]],
+    [["c", true], ["d", true]],
+    [["c", false], ["a", true]],
+    [["c", false], ["a", false]],
+    [["b", true], ["a", true]],
+    [["b", true], ["a", false]],
+    [["d", true], ["a", true]],
+    [["d", true], ["a", false]]
+]

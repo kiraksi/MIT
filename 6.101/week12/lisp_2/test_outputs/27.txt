@@ -1,0 +1,5 @@
+[
+{'ok': True, 'output': 24},
+{'ok': True, 'output': 'SOMETHING'},
+{'ok': True, 'output': -19.400000000000002},
+]

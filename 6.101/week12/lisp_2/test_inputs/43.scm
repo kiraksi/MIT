@@ -1,0 +1,6 @@
+(cdr (cdr (cdr (list 1 2 3 4))))
+(car (cdr (cdr (cdr (list 1 2 3 4)))))
+(cdr (car (list (list 1 2 (list 3)) 4 5 6)))
+(car (car (cdr (cdr (car (list (list 1 2 (list 3)) 4 5 6))))))
+(cdr (car (cdr (cdr (car (list (list 1 2 (list 3)) 4 5 6))))))
+(car (list))

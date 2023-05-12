@@ -1,0 +1,4 @@
+(define y 10)
+(let ((z (+ y 2))) (+ y z))
+y
+z

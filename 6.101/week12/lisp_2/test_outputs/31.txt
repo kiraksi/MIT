@@ -1,0 +1,5 @@
+[
+{"ok": True, "output": ["(", "multi", "line", "statement", ")"]},
+{"ok": True, "output": ["(", "weird", "white", "space", ")"]},
+{"ok": True, "output": ["(", "w3!|]\\d5y8[]1$", ")"]},
+]

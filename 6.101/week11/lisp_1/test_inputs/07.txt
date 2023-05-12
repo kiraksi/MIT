@@ -1,0 +1,9 @@
+[
+  ['define', 'somevariable', ['+', 1, 2]],
+  ['+', 7, ['*', 'somevariable', 2, 'somevariable']],
+  ['define', 'x', 2],
+  ['define', 'y', 'x'],
+  ['define', 'x', 3],
+  'x',
+  'y',
+]

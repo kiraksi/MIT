@@ -1,0 +1,5 @@
+[
+{'ok': True, 'output': 'SOMETHING'},
+{'ok': False, 'type': 'SchemeNameError'},
+{'ok': False, 'type': 'SchemeNameError'},
+]

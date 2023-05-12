@@ -1,0 +1,5 @@
+[
+  "(multi\nline\nstatement)",
+  "(weird          white\n                 space)",
+  "(w3!|]\\d5y8[]1$)",
+]

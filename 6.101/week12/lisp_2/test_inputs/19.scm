@@ -1,0 +1,6 @@
+(define (spam x) (lambda (y) (+ (* 2 x) (* y y))))
+(define (eggs x y) (spam x))
+((eggs 9 10) 2)
+(define x 20)
+(define y (eggs 8 7))
+(y 10)

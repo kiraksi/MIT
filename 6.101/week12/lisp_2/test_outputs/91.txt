@@ -1,0 +1,8 @@
+[
+{'ok': True, 'output': 0},
+{'ok': True, 'output': 1},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': False, 'type': 'SchemeEvaluationError'},
+{'ok': True, 'output': 'SOMETHING'},
+{'ok': True, 'output': 7},
+]
