@@ -19,3 +19,5 @@ Following MIT's degree requirements for their major 6-3: Computer Science and En
  - 6.3900 Introduction to Machine Learning
  - 2 from AUS2
  - 3 from EECS
+
+## MIT MicroMasters in Data Science and Machine Learning
