@@ -1,3 +1,24 @@
+# Material #
+Environmental Model
+
+Functions
+
+Flood Fill
+
+Graph Search
+
+Recursion
+
+Recursion and Iteration
+
+Backtracking
+
+Custom Types and the Environment Model
+
+Inheritance and Object-Oriented Design
+
+Functional Programming
+
 # Syllabus #
 Labs: 50%
 Midterm: 20%
