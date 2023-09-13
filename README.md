@@ -2,7 +2,7 @@
 
 Following MIT's degree requirements for their major 6-3: Computer Science and Engineering (pre 2022)
 
-## MIT Engineering and Computer Science Degree Requirements
+## MIT Mathematics with Computer Science Degree Requirements
 
  - 6.100A Introduction to Computer Science Programming in Python <i>- on edX</i> - <b>completed</b>
  - 6.0002 Introduction to Computational Thinking and Data Science <i>- on edX</i>
@@ -21,3 +21,11 @@ Following MIT's degree requirements for their major 6-3: Computer Science and En
  - 3 from EECS
 
 ## MIT MicroMasters in Data Science and Machine Learning
+
+## MIT Introduction to Deep Learning
+
+## MIT Introduction to Program Synthesis
+
+## MIT Missing Semester
+
+## MIT MicroMasters in Finance
